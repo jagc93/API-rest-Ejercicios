@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: ApiRest
+  jpa:
+    show-sql: false
+    format-sql: true
+    database-platform: org.hibernate.dialect.OracleDialect
+    properties:
+      hibernate:
+        proc:
+          param_null_passing: true
+
+server:
+  port: 8081
+  tomcat:
+      max-threads: 200
+
+# swagger and api-docs
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
+    packagesToScan: com.apirest
+
+datasource:
+  url: jdbc:oracle:thin:@localhost:1521:xe
+  jdbc-url: jdbc:oracle:thin:@localhost:1521:xe
+  username: APIREST
+  password: APIREST
+  type: com.zaxxer.hikari.HikariDataSource
+  #connection-test-query: SELECT 1 FROM DUAL
+  pool-name: pool-hikari-epayment
+  maximum-pool-size: 10
+  minimum-idle: 5
+  idle-timeout: 300000
+  connection-timeout: 30000
