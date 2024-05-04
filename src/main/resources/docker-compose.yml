@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  oracledb:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: apirest_oracle_12c
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+    networks:
+      - backend
+
+#  redis:
+#    image: redis:latest
+#    container_name: apirest_redis
+#    ports:
+#      - "6379:6379"
+#    networks:
+#      - backend
+
+#  microservicio:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: apirest_microservice
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - oracledb
+#      - redis
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=prod
+#      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracledb:1521:xe
+#      - SPRING_DATASOURCE_USERNAME=APIREST
+#      - SPRING_DATASOURCE_PASSWORD=APIREST
+#      - HOST_REDIS=redis
+#      - PORT_REDIS=6379
+#      - DURATION_MINUTES_REDIS=10
+#    networks:
+#      - backend
+
+networks:
+  backend:
+    driver: bridge
